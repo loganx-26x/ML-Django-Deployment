@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Linear Regression</title>
+</head>
+<body>
+
+    <form action="{% url 'result' %}">
+
+        {% csrf_token %}
+
+        Area: &emsp13;	&emsp13; <input type="number" required name="price"><br /><br />
+        No. of Bedrooms: <input type="number" required name="area"><br /> <br />
+
+        <input type="submit" name="" value="submit">
+    </form>
+
+</body>
+</html>
