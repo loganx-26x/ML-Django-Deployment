@@ -4,16 +4,31 @@
     <meta charset="UTF-8">
     <title>Linear Regression</title>
 </head>
-<body>
+<body style="background-color:#1c87c9;">
 
-    <form action="{% url 'result' %}">
+    <form action="" method="GET">
 
         {% csrf_token %}
 
-        Area: &emsp13;	&emsp13; <input type="number" required name="price"><br /><br />
-        No. of Bedrooms: <input type="number" required name="area"><br /> <br />
+        Area: &emsp13;	&emsp13; <input type="number" required name="area"><br /><br />
+        No. of Bedrooms: <input type="number" required name="bedrooms"><br /> <br />
 
         <input type="submit" name="" value="submit">
+
+        {% if modelresult %}
+            <h3> The Area of the room is {{ house_area }} sq. meters and the No. of Bedrooms is:
+                {{ house_bedrooms }}</h3>
+            <h3> So, the estimated price of the house would be around:  {{modelresult}} Rupees</h3>
+
+
+            <!--
+            <h3> The data you entered is: {{prediction}}</h3>
+            <h3> The result is {{modelresult}}</h3>
+            <!-->
+
+        {% endif %}
+        <br /><br />
+        <a href="{% url 'home' %}"> Click here to Go to Home</a>
     </form>
 
 </body>
