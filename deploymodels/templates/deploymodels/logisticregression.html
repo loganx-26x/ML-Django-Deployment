@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logistic Regression</title>
+</head>
+<body style="background-color:#1c87c9;">
+    <form action="" method="get">
+        {% csrf_token %}
+
+        Word <input type="text" required name="sentence">
+        <br /> <br />
+        <input type="submit" name="" value="submit">
+
+        {% if logisticmodel %}
+            <h3> The sentence is {{ logisticmodel }} </h3>
+
+        {% endif %}
+        <br /> <br />
+        <a href="{% url 'home' %} "> Click here to get to home</a>
+    </form>
+</body>
+</html>

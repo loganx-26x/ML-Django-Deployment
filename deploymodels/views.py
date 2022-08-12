@@ -1,6 +1,7 @@
+import pandas as pd
 from django.shortcuts import render
 import joblib
-
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 def home(request):
     return render(request, 'deploymodels/home.html')
@@ -23,12 +24,23 @@ def linearregression(request):
                                                                   "house_bedrooms": house_bedrooms})
 
 
-def result(request):
-    model = joblib.load("finalized_model.sav")
+def logisticregression(request):
+    sentence = None
+    logistic_result = None
 
-    price = request.GET['price']
-    area = request.GET["area"]
+    if request.GET.get("sentence"):
+        sentence = request.GET.get("sentence")
 
-    modelresult = str(int(model.predict([[int(price), int(model_values[1])]])))
+        logistic_model = joblib.load("LogisticRegression.sav")
+        logistic_vector = joblib.load("LogisticVector.sav")
 
-    return render(request, "deploymodels/result.html", {"modelresult": modelresult, "prediction": model_values})
+        predict_val = logistic_vector.transform([sentence])
+        logistic_result = logistic_model.predict(predict_val)
+
+        logistic_result_val = str(logistic_result[0])
+        if logistic_result_val == "positive":
+            logistic_result = "Not Spam"
+        else:
+            logistic_result = "Spam"
+
+    return render(request, "deploymodels/logisticregression.html", {"logisticmodel": logistic_result})

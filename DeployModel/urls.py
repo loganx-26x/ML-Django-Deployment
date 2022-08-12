@@ -20,6 +20,6 @@ from deploymodels import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name="home"),
-    path('result/', views.result, name="result"),
+    path('logisticregression/', views.logisticregression, name="logisticregression"),
     path('linearregression/', views.linearregression, name="linearregression"),
 ]
