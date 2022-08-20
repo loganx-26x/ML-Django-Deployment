@@ -2,6 +2,9 @@ import pandas as pd
 from django.shortcuts import render
 import joblib
 from sklearn.feature_extraction.text import TfidfVectorizer
+from PIL import Image
+from .forms import ImageForm
+
 
 def home(request):
     return render(request, 'deploymodels/home.html')
@@ -44,3 +47,31 @@ def logisticregression(request):
             logistic_result = "Spam"
 
     return render(request, "deploymodels/logisticregression.html", {"logisticmodel": logistic_result})
+
+
+def neural_network(request):
+    """
+    import numpy as np
+    image_cls = None
+    image_val = None
+
+    if request.GET.get("image"):
+        with Image.open(request.GET.get("image")) as im:
+            image_val = im.load()
+        image_classifier = joblib.load("./LogisticRegression.sav")
+        image_cls = image_classifier.predict(image_val)
+        # predictions = [np.argmax(pred) for pred in image_cls]
+
+    return render(request, "deploymodels/neuralnetwork.html", {"image_cls": image_cls})
+    """
+    """Process images uploaded by users"""
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            # Get the current instance object to display in the template
+            img_obj = form.instance
+            return render(request, 'deploymodels/neuralnetwork.html', {'form': form, 'img_obj': img_obj})
+    else:
+        form = ImageForm()
+    return render(request, 'deploymodels/neuralnetwork.html', {'form': form})

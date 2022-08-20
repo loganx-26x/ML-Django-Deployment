@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Neural Network</title>
+</head>
+<body style="background-color:#1c87c9;">
+    <form method="post" enctype="multipart/form-data">
+        <h2>Image Recognition from 1 to 10.</h2>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
+    {% if image_cls %}
+        <h3> The number is {{ image_cls }} </h3>
+    {% endif %}
+
+    <br /> <br />
+    <a href="{% url 'home' %} "> Click here to get to home</a>
+</body>
+</html>
