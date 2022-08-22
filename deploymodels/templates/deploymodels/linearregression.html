@@ -3,17 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Linear Regression</title>
-</head>
-<body style="background-color:#1c87c9;">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+        #textboxid, #textboxid2
+        {
+            width: 400px;
+            font-size:14pt;
+        }
 
+        #wrapper
+        {
+          width: 30%;     /* specify a width! */
+          margin: 0 auto; /* center */
+        }
+
+    </style>
+</head>
+<body id="wrapper">
+    <h1>House Prediction</h1>
     <form action="" method="GET">
 
         {% csrf_token %}
 
-        Area: &emsp13;	&emsp13; <input type="number" required name="area"><br /><br />
-        No. of Bedrooms: <input type="number" required name="bedrooms"><br /> <br />
+        <br /> <br /> <br />
+            <h3> Enter the area for which you think the home fits in the best<br /></h3>
+            <input type="number" id="textboxid" required name="area"><br /><br />
+            <h3>Enter the number of bedrooms the house has within the area</h3>
+            <input type="number" id="textboxid2" required name="bedrooms"><br /> <br />
 
-        <input type="submit" name="" value="submit">
+        <br />
+        <input type="submit" name="" value="Submit"  class="btn btn-primary">
 
         {% if modelresult %}
             <h3> The Area of the room is {{ house_area }} sq. meters and the No. of Bedrooms is:
@@ -26,8 +46,10 @@
             <!-->
 
         {% endif %}
-        <br /><br />
+        <br /> <br /> <br />
+        <h3>
         <a href="{% url 'home' %}"> Click here to Go to Home</a>
+        </h3>
     </form>
 
 </body>

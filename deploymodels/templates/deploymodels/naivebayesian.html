@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Naive Bayes</title>
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+
+        #textboxid, #textboxid2, #textboxid3, #textboxid4, #textboxid5, #textboxid6,
+        #textboxid7, #textboxid8, #textboxid8, #textboxid9, #textboxid10
+        {
+            width: 400px;
+            font-size:14pt;
+        }
+
+        #wrapper
+        {
+          width: 30%;     /* specify a width! */
+          margin: 0 auto; /* center */
+        }
+
+    </style>
+</head>
+<body id="wrapper">
+    <h2>Heart Disease Prediction</h2>
+    <form action="" method="get">
+
+        {% csrf_token %}
+        <br /> <br />
+        <h3>Age of the Patient</h3>
+        <input type="number" id="textboxid" required name="age"><br /> <br />
+
+        <h3>Gender of the Patient(1-Male, 0-Female)</h3>
+        <input type="number" id="textboxid2" required name="gender"><br /> <br />
+
+        <h3> Trestbps of the Patient</h3>
+        <input type="number" id="textboxid3" required name="tbps"><br/> <br />
+
+        <h3>Cholesterol of the Patient</h3>
+        <input type="number" id="textboxid10" required name="chol"><br/> <br />
+
+        <h3>Fasting blood sugar of Patient(1 or 0)</h3>
+        <input type="number" id="textboxid4" required name="fbs"><br/> <br />
+
+        <h3>Resting Electrocardiographic Measurement of the Patient(0-2)</h3>
+        <input type="number" id="textboxid5" required name="restecg"><br/> <br />
+
+        <h3>Thalach of the Patient</h3>
+        <input type="number" id="textboxid6" required name="tha"><br/> <br />
+
+        <h3>Exercise induced angina of the Patient(0-1)</h3>
+        <input type="number" id="textboxid7" required name="exang"><br/> <br />
+
+        <h3>OldPeak of the Patient(1-3)</h3>
+        <input type="number" id="textboxid8" required name="olpe"><br/> <br />
+
+        <h3>Slope of the Patient(1-3)</h3>
+        <input type="number" id="textboxid9" required name="slope"><br/> <br />
+
+        <br /> <br />
+        <input type="submit" name="" value="Submit" class="btn btn-primary">
+
+        {% if result %}
+            {% if result is "Safe" %}
+                <h3> The patient is safe from any kind of problems.</h3>
+            {% else %}
+                <h3> The patient is likely going through some Heart Problems. Please visit a doctor
+                as soon as possible and get a checkup.</h3>
+
+            {% endif %}
+        {% endif %}
+
+        <br /><br /> <br />
+        <h3>
+            <a href="{% url 'home' %}"> Click here to Go to Home</a>
+        </h3>
+    </form>
+</body>
+</html>

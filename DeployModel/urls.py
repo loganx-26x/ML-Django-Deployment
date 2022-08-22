@@ -26,6 +26,7 @@ urlpatterns = [
     path('logisticregression/', views.logisticregression, name="logisticregression"),
     path('linearregression/', views.linearregression, name="linearregression"),
     path('neuralnetwork/', views.neural_network, name="neuralnetwork"),
+    path('naivebayesian/', views.naive_bayes, name="naivebayesian")
 ]
 
 if settings.DEBUG:

@@ -3,21 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>Logistic Regression</title>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+        #textboxid
+        {
+            height:200px;
+            width: 400px;
+            font-size:14pt;
+        }
+
+        #wrapper
+        {
+          width: 30%;     /* specify a width! */
+          margin: 0 auto; /* center */
+        }
+
+    </style>
 </head>
-<body style="background-color:#1c87c9;">
+<body id="wrapper">
+    <h1>Sentence Prediction</h1>
     <form action="" method="get">
         {% csrf_token %}
-
-        Word <input type="text" required name="sentence">
         <br /> <br />
-        <input type="submit" name="" value="submit">
+        <h3>Enter your desired sentence and the model would try to <br />
+            predict if it's a Spam or Ham one.</h3><br />
+          <textarea class="form-control" rows="5" id="comment" required name="sentence"></textarea>
+        <br /> <br />
+        <input type="submit" name="" value="Submit" class="btn btn-primary">
 
+        <br />
         {% if logisticmodel %}
             <h3> The sentence is {{ logisticmodel }} </h3>
 
         {% endif %}
-        <br /> <br />
-        <a href="{% url 'home' %} "> Click here to get to home</a>
+        <br /> <br /> <br />
+        <h3>
+            <a href="{% url 'home' %} "> Click here to get to home</a>
+        </h3>
     </form>
 </body>
 </html>

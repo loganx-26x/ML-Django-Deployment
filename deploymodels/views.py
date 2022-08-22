@@ -4,6 +4,8 @@ import joblib
 from sklearn.feature_extraction.text import TfidfVectorizer
 from PIL import Image
 from .forms import ImageForm
+import cv2
+from .models import Image
 
 
 def home(request):
@@ -65,13 +67,48 @@ def neural_network(request):
     return render(request, "deploymodels/neuralnetwork.html", {"image_cls": image_cls})
     """
     """Process images uploaded by users"""
+    import numpy as np
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             # Get the current instance object to display in the template
             img_obj = form.instance
+            image = cv2.imread(Image.objects.all(), cv2.COLOR_BGR2GRAY)
+            print(Image.objects.all())
+            """new_shaped_image = np.reshape(image, (28, 28))
+
+            image_classifier = joblib.load("./LogisticRegression.sav")
+            image_cls = image_classifier.predict(new_shaped_image)"""
             return render(request, 'deploymodels/neuralnetwork.html', {'form': form, 'img_obj': img_obj})
     else:
         form = ImageForm()
     return render(request, 'deploymodels/neuralnetwork.html', {'form': form})
+
+
+def naive_bayes(request):
+    naivebayes_result = None
+    if request.GET.get("age"):
+        age = request.GET.get("age")
+        gender = request.GET.get("gender")
+        trestbps = request.GET.get("tbps")
+        chol = request.GET.get("chol")
+        fbs = request.GET.get("fbs")
+        restecg = request.GET.get("restecg")
+        tha = request.GET.get("tha")
+        exang = request.GET.get("exang")
+        olpe = request.GET.get("olpe")
+        slope = request.GET.get("slope")
+
+        naivebayes_model = joblib.load("NaiveBayes.sav")
+        model_values = [age, gender, trestbps, chol, fbs, restecg, tha, exang, olpe, slope]
+
+        modelresult = naivebayes_model.predict([[int(age), int(gender), int(trestbps), int(chol), int(fbs),
+                                                 int(restecg), int(tha), int(exang), int(olpe), int(slope)]])
+
+        if modelresult == "No":
+            naivebayes_result = "Safe"
+        else:
+            naivebayes_result = "Heart Problems"
+
+    return render(request, 'deploymodels/naivebayesian.html', {"result": naivebayes_result})

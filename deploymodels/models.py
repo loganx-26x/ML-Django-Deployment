@@ -9,3 +9,6 @@ class Image(models.Model):
 
     def __str__(self):
         return self.title
+
+    def __long__(self):
+        return self.image
